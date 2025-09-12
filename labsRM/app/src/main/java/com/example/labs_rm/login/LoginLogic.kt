@@ -1,0 +1,4 @@
+package com.example.labs_rm.login
+
+class LoginLogic {
+}
