@@ -1,4 +1,4 @@
-package com.example.labs_rm.locations.locationDetails
+package com.example.labs_rm.loggedTabs.locations.locationDetails
 
 import kotlinx.serialization.Serializable
 

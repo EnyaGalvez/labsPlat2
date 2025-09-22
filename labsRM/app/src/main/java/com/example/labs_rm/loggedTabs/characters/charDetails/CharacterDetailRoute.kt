@@ -1,4 +1,4 @@
-package com.example.labs_rm.characters.charDetails
+package com.example.labs_rm.loggedTabs.characters.charDetails
 
 import kotlinx.serialization.Serializable
 

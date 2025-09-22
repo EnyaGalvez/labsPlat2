@@ -1,7 +1,5 @@
-package com.example.labs_rm.characters.charList
+package com.example.labs_rm.loggedTabs.characters.charList
 
-import android.app.Activity
-import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -23,11 +21,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import CharacterDb
-import Character
+import com.example.labs_rm.databases.charData.CharacterDb
+import com.example.labs_rm.databases.charData.Character
 
 @Composable
 fun CharacterList(
@@ -35,9 +32,6 @@ fun CharacterList(
     db: CharacterDb = CharacterDb()
 ) {
     val chars = remember { db.getAllCharacters() }
-
-    val activity = LocalContext.current as Activity
-    BackHandler(true) { activity.finish() }
 
     LazyColumn(
         modifier = Modifier.fillMaxSize(),

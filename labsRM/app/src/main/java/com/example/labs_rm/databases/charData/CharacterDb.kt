@@ -1,3 +1,5 @@
+package com.example.labs_rm.databases.charData
+
 class CharacterDb {
     private val characters: List<Character> = listOf(
         Character(1, "Rick Sanchez", "Alive", "Human", "Male", "https://rickandmortyapi.com/api/character/avatar/1.jpeg"),

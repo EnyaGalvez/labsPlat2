@@ -1,4 +1,4 @@
-// import .....Location
+package com.example.labs_rm.databases.locationData
 
 class LocationDb {
     private val locations: List<Location> = listOf(
