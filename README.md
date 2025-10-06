@@ -1,2 +1,2 @@
 # labsPlat2
-Laboratorio 8
+Laboratorio 10 - Componentes de arquitectura - ViewModel y Observables
