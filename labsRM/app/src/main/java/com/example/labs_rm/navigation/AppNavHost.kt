@@ -7,12 +7,16 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
 import com.example.labs_rm.loggedTabs.MainScaffold
+import com.example.labs_rm.loggedTabs.characters.charDetails.CharDetailWithState
 import com.example.labs_rm.loggedTabs.characters.charList.CharacterListRoute
 import com.example.labs_rm.loggedTabs.characters.charList.CharacterList
 import com.example.labs_rm.loggedTabs.characters.charDetails.CharacterDetailRoute
 import com.example.labs_rm.loggedTabs.characters.charDetails.CharacterDetail
+import com.example.labs_rm.loggedTabs.characters.charList.CharListWithState
+import com.example.labs_rm.loggedTabs.locations.locationDetails.LocDetailWithState
 import com.example.labs_rm.loggedTabs.locations.locationDetails.LocationDetail
 import com.example.labs_rm.loggedTabs.locations.locationDetails.LocationDetailRoute
+import com.example.labs_rm.loggedTabs.locations.locationList.LocListWithState
 import com.example.labs_rm.loggedTabs.locations.locationList.LocationListRoute
 import com.example.labs_rm.loggedTabs.locations.locationList.LocationList
 import com.example.labs_rm.loggedTabs.navRoute
@@ -53,7 +57,7 @@ fun AppNavHost() {
                     }
                 }
             ) {
-                CharacterList(
+                CharListWithState(
                     onCharacterClick = { id ->
                         nav.navigate(CharacterDetailRoute(id))
                     }
@@ -76,7 +80,7 @@ fun AppNavHost() {
                 },
                 onBack = { nav.popBackStack() }
             ) {
-                CharacterDetail(id = argsChar.id)
+                CharDetailWithState(id = argsChar.id)
             }
         }
 
@@ -93,7 +97,7 @@ fun AppNavHost() {
                     }
                 }
             ) {
-                LocationList(
+                LocListWithState(
                     onLocationClick = { id ->
                         nav.navigate(LocationDetailRoute(id))
                     }
@@ -116,7 +120,7 @@ fun AppNavHost() {
                 },
                 onBack = { nav.popBackStack() }
             ) {
-                LocationDetail(id = argsLocation.id)
+                LocDetailWithState(id = argsLocation.id)
             }
         }
 

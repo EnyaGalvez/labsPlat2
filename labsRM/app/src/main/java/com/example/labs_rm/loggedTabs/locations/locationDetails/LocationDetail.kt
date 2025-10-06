@@ -8,12 +8,36 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.labs_rm.databases.locationData.LocationDb
 import com.example.labs_rm.loggedTabs.InfoRow
+import com.example.labs_rm.viewModel.ErrorScreen
+import com.example.labs_rm.viewModel.LoadingScreen
+import com.example.labs_rm.viewModel.ScreenStates
+
+@Composable
+fun LocDetailWithState(
+    id: Int,
+    vm: LocDtViewModel = viewModel()
+) {
+    val state: ScreenStates by vm.state.collectAsStateWithLifecycle()
+
+    when {
+        state.isLoading -> LoadingScreen()
+        state.isError -> ErrorScreen(
+                errorMessage = "Error al obtener información de la ubicación.",
+                switchStateClick = { vm.switchState() }
+            )
+        state.isLoaded -> LocationDetail(id = id)
+    }
+}
 
 @Composable
 fun LocationDetail(

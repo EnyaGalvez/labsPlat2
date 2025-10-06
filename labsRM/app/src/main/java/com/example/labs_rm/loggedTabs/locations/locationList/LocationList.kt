@@ -12,13 +12,35 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.labs_rm.databases.locationData.Location
 import com.example.labs_rm.databases.locationData.LocationDb
+import com.example.labs_rm.viewModel.ErrorScreen
+import com.example.labs_rm.viewModel.LoadingScreen
+
+@Composable
+fun LocListWithState(
+    onLocationClick: (Int) -> Unit,
+    vm: LocListViewModel = viewModel()
+) {
+    val state by vm.state.collectAsStateWithLifecycle()
+
+    when {
+        state.isLoading -> LoadingScreen()
+        state.isError -> ErrorScreen(
+                errorMessage = "Error al obtener lista de ubicaciones.",
+                switchStateClick = { vm.switchState() }
+            )
+        state.isLoaded -> LocationList(onLocationClick = onLocationClick)
+    }
+}
 
 @Composable
 fun LocationList(

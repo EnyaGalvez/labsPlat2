@@ -12,12 +12,37 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.labs_rm.databases.charData.CharacterDb
 import com.example.labs_rm.loggedTabs.InfoRow
+import com.example.labs_rm.viewModel.CommonStateViewModel
+import com.example.labs_rm.viewModel.ErrorScreen
+import com.example.labs_rm.viewModel.LoadingScreen
+import com.example.labs_rm.viewModel.ScreenStates
+
+@Composable
+fun CharDetailWithState(
+    id: Int,
+    vm: ChrDtViewModel = viewModel()
+) {
+    val state by vm.state.collectAsStateWithLifecycle()
+
+    when {
+        state.isLoading -> LoadingScreen()
+        state.isError -> ErrorScreen(
+                errorMessage = "Error al obtener información del personaje.",
+                switchStateClick = { vm.switchState() }
+            )
+        state.isLoaded -> CharacterDetail(id = id)
+    }
+}
 
 @Composable
 fun CharacterDetail(
